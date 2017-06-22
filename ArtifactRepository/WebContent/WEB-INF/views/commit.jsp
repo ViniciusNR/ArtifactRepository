@@ -79,15 +79,12 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="href=/ArtifactRepository/index">Software Artifact Repository</a>
+						<a class="navbar-brand" href="/ArtifactRepository/index">Software Artifact Repository</a>
 					</div>
 				</nav>
 
 				<div class="jumbotron well">
 					<form action="/ArtifactRepository/commit">
-<%-- 						<h4>Repositório: ${uriClonedRepo}</h4> --%>
-<%-- 						<h5>Endereço Local: ${localPath}</h5> --%>
-						<button type="submit" class="btn btn-default">Commit</button>
 						<button type="button" class="btn btn-default show_hide">Adicionar
 							Metadados</button>
 					</form>
@@ -100,24 +97,24 @@
 						</div>
 						<div class="panel-body">
 							<div class="input-group">
-								<span class="input-group-addon">Nome:</span> <input type="text"
+								<span class="input-group-addon">Nome:</span> <input name="nomeSoftware" type="text"
 									class="form-control" placeholder="Nome do Software"
 									aria-describedby="basic-addon1">
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Descrição:</span> <input
-									type="text" class="form-control" placeholder="Breve Descrição"
+									name="descricao" type="text" class="form-control" placeholder="Breve Descrição"
 									aria-describedby="basic-addon1">
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Versão:</span> <input
-									type="text" class="form-control"
+									name="versao" type="text" class="form-control"
 									placeholder="Versão do Software"
 									aria-describedby="basic-addon1">
 							</div>
 							<div class="input-group">
 								<span class="input-group-addon">Autores:</span> <input
-									type="text" class="form-control" placeholder="Autor 1, Autor 2"
+									name="autores" type="text" class="form-control" placeholder="Autor 1, Autor 2"
 									aria-describedby="basic-addon1">
 							</div>
 						</div>

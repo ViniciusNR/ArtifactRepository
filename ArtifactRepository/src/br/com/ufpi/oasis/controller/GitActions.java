@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +21,7 @@ import br.com.ufpi.oasis.util.Util;
 public class GitActions {
 	int responseCode;
 	
-	public void requisicaoInicial(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public void requisicaoInicial(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException{
 		String url = Constantes.URL_AUTENTICACAO;
 	
 		URL obj = new URL(url);
@@ -31,13 +29,49 @@ public class GitActions {
 		con.setRequestMethod("GET");
 		responseCode = con.getResponseCode();
 		
-		if(request.getParameter("code") == null || request.getParameter("code").equals("")){
-			response.sendRedirect(url);
-		}else{
-			Constantes.CODIGO_AUTORIZACAO = request.getParameter("code");
-			System.out.println("#AUTENTICA«√O");
-			System.out.println("CÛdigo de AutorizaÁ„o: " + Constantes.CODIGO_AUTORIZACAO);
-			System.out.println("Status: " + responseCode);
+		response.sendRedirect(url);
+	}
+	
+	public void requisitarAccessToken() throws IOException, JSONException{
+		
+		String url = Constantes.URL_BASE + "access_token";
+		
+		JSONObject params = new JSONObject();
+		params.put("client_id", Constantes.CLIENT_ID);
+		params.put("client_secret", Constantes.CLIENT_SECRET);
+		params.put("code", Constantes.CODIGO_AUTORIZACAO);
+		
+		
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+		
+		con.setRequestMethod("POST");
+		con.setRequestProperty("Content-Type", "application/json");
+		con.setDoOutput(true);
+		
+		try(OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream())) {
+		   wr.write( params.toString() );
+		   wr.flush();
+		   wr.close();
+		}
+		
+		responseCode = con.getResponseCode();
+		System.out.println("/n#RESULTADO ACCESS TOKEN");
+		System.out.println("Status: " + responseCode);
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer resp = new StringBuffer();
+
+		while ((inputLine = in.readLine()) != null) {
+			resp.append(inputLine);
+		}
+		in.close();
+		
+		if(responseCode == HttpURLConnection.HTTP_OK){
+			System.out.println("Resposta: " + resp);
+			Constantes.ACCESS_TOKEN = resp.substring(resp.indexOf("=") + 1,resp.indexOf("&"));
+			System.out.println(Constantes.ACCESS_TOKEN);
 		}
 	}
 	
@@ -124,8 +158,7 @@ public class GitActions {
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		
 		con.setRequestMethod("PUT");
-		//a916a31a2701e16b3c7d319c72487833398d835f
-		con.setRequestProperty("Authorization", "token a916a31a2701e16b3c7d319c72487833398d835f");
+		con.setRequestProperty("Authorization", "token "+Constantes.ACCESS_TOKEN);
 		con.setRequestProperty("Content-Type", "application/json");
 		con.setDoOutput(true);
 		
@@ -138,7 +171,7 @@ public class GitActions {
 		con.connect();
 		responseCode = con.getResponseCode();
 		System.out.println("URL: " + url);
-		System.out.println("#CRIA«√O/UPLOAD ARQUIVO METADADOS.PRINC");
+		System.out.println("#CRIA√á√ÉO/UPLOAD ARQUIVO METADADOS.PRINC");
 		System.out.println("Status: " + responseCode);
 		
 		if(responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_CREATED){
@@ -153,7 +186,7 @@ public class GitActions {
 			
 			System.out.println("Resposta: " + resp);
 			JSONObject json = new JSONObject(resp.toString());
-			System.out.println("/n#RESPOSTA CRIA«√O/UPLOAD ARQUIVO METADADOS.PRINC");
+			System.out.println("/n#RESPOSTA CRIA√á√ÉO/UPLOAD ARQUIVO METADADOS.PRINC");
 			System.out.println(json.toString());
 		}
 	}
