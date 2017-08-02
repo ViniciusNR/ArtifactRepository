@@ -41,7 +41,7 @@ public class Util {
 		infoBasicas.put("autores", autores);
 		
 		metadados.put("metadados", new JSONArray(params));
-		metadados.put("info-basicas", infoBasicas);
+		metadados.put("infoBasicas", infoBasicas);
 		
 		return metadados.toString();
 	}

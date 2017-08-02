@@ -32,7 +32,7 @@
 						var salvar = $(".salvar");
 						var stringList = [];
 						var x = 1; //initlal text box count
-
+						
 						//var text = document.getElementById("json").value;
 						var text = $("#json").html().trim();
 						console.log("CONSOLE: " + text);
@@ -50,8 +50,13 @@
 												+jsOb.metadados[i].valor+
 												'"> <span class="input-group-btn"><button class="btn btn-default remove_field btn-danger" type="button"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></span></div></div>'));
 							}
+							$("#nomeSoftware").val(jsOb.infoBasicas.nomeSoftware);
+							$("#descricaoSoftware").val(jsOb.infoBasicas.descricao);
+							$("#versaoSoftware").val(jsOb.infoBasicas.versao);
+							$("#autoresSoftware").val(jsOb.infoBasicas.autores);
 						}
 
+						
 						$(add_button)
 								.click(
 										function(e) { //on add input button click
@@ -79,7 +84,8 @@
 			<div class="col-md-12">
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="/ArtifactRepository/index">Software Artifact Repository</a>
+						<a class="navbar-brand" href="/ArtifactRepository/index">Software
+							Artifact Repository</a>
 					</div>
 				</nav>
 
@@ -90,39 +96,39 @@
 					</form>
 				</div>
 
-				<div class="col-md-6">
-					<div class="slidingDiv panel panel-default">
-						<div class="panel-heading">
-							<h3 class="panel-title">Cabeçalho Arquivo de Metadados</h3>
-						</div>
-						<div class="panel-body">
-							<div class="input-group">
-								<span class="input-group-addon">Nome:</span> <input name="nomeSoftware" type="text"
-									class="form-control" placeholder="Nome do Software"
-									aria-describedby="basic-addon1">
+				<form action="/ArtifactRepository/salvarArquivo">
+					<div class="col-md-6">
+						<div class="slidingDiv panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Cabeçalho Arquivo de Metadados</h3>
 							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Descrição:</span> <input
-									name="descricao" type="text" class="form-control" placeholder="Breve Descrição"
-									aria-describedby="basic-addon1">
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Versão:</span> <input
-									name="versao" type="text" class="form-control"
-									placeholder="Versão do Software"
-									aria-describedby="basic-addon1">
-							</div>
-							<div class="input-group">
-								<span class="input-group-addon">Autores:</span> <input
-									name="autores" type="text" class="form-control" placeholder="Autor 1, Autor 2"
-									aria-describedby="basic-addon1">
+							<div class="panel-body">
+								<div class="input-group">
+									<span class="input-group-addon">Nome:</span> <input
+										id="nomeSoftware" name="nomeSoftware" type="text" class="form-control"
+										placeholder="Nome do Software" aria-describedby="basic-addon1">
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon">Descrição:</span> <input
+										id="descricaoSoftware" name="descricao" type="text" class="form-control"
+										placeholder="Breve Descrição" aria-describedby="basic-addon1">
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon">Versão:</span> <input
+										id="versaoSoftware" name="versao" type="text" class="form-control"
+										placeholder="Versão do Software"
+										aria-describedby="basic-addon1">
+								</div>
+								<div class="input-group">
+									<span class="input-group-addon">Autores:</span> <input
+										id="autoresSoftware" name="autores" type="text" class="form-control"
+										placeholder="Autor 1, Autor 2" aria-describedby="basic-addon1">
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="col-md-6">
-					<form action="/ArtifactRepository/salvarArquivo">
+					<div class="col-md-6">
 						<div class="panel panel-default slidingDiv">
 							<div class="panel-heading">
 								<h3 class="panel-title">Metadados [Nome : Valor]</h3>
@@ -142,8 +148,8 @@
 								</div>
 							</div>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

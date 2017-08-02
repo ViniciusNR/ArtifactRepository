@@ -29,7 +29,14 @@ public class HomeController {
 	GitActions gitActions = new GitActions();
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, JSONException {
+		if(Constantes.REPO_OWNER != null && !Constantes.REPO_OWNER.isEmpty()) {
+			ModelAndView mav = new ModelAndView("index");
+			repos = gitActions.listarRepositorios(request);
+			mav.addObject("repositorios", repos);
+			return mav;
+		}
+		
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject("login", new Login());
 		return mav;
@@ -37,7 +44,6 @@ public class HomeController {
 
 	@RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
 	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, @ModelAttribute("login") Login login) throws IOException, JSONException {
-
 //		User user = userService.validateUser(login);
 //		if (null != user) {
 //			mav = new ModelAndView("welcome");

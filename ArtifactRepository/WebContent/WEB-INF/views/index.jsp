@@ -37,18 +37,18 @@
 				</div>
 				<div class="col-md-6">
 					<div class="jumbotron well">
-						<form action="/ArtifactRepository/cloneHttp">
-							<h4>Clonar Repositório GIT</h4>
-							<div class="input-group">
-								<span class="input-group-addon" id="basic-addon3">https://github.com/user/repository.git</span>
-								<input type="text" name="uriClone" class="form-control"
-									id="basic-url" aria-describedby="basic-addon3">
-							</div>
-							<button type="submit" class="btn btn-default">Clonar</button>
-						</form>
-						<form action="/ArtifactRepository/autenticar">
-							<button type="submit" class="btn btn-default">Autenticar</button>
-						</form>
+<!-- 						<form action="/ArtifactRepository/cloneHttp"> -->
+<!-- 							<h4>Clonar Repositório GIT</h4> -->
+<!-- 							<div class="input-group"> -->
+<!-- 								<span class="input-group-addon" id="basic-addon3">https://github.com/user/repository.git</span> -->
+<!-- 								<input type="text" name="uriClone" class="form-control" -->
+<!-- 									id="basic-url" aria-describedby="basic-addon3"> -->
+<!-- 							</div> -->
+<!-- 							<button type="submit" class="btn btn-default">Clonar</button> -->
+<!-- 						</form> -->
+<!-- 						<form action="/ArtifactRepository/autenticar"> -->
+<!-- 							<button type="submit" class="btn btn-default">Autenticar</button> -->
+<!-- 						</form> -->
 					</div>
 				</div>
 			</div>
