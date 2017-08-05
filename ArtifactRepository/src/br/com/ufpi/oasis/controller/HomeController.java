@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.ufpi.oasis.entidade.Login;
-import br.com.ufpi.oasis.entidade.Repositorio;
 import br.com.ufpi.oasis.util.Constantes;
 import br.com.ufpi.oasis.util.Util;
 
@@ -24,7 +23,6 @@ public class HomeController {
 	String[] tags;
 	String[] valores;
 	String json = "";
-	ArrayList<Repositorio> repositorios = new ArrayList<Repositorio>();
 	ArrayList<String> repos = new ArrayList<String>();
 	GitActions gitActions = new GitActions();
 
